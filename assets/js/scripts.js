@@ -52,9 +52,9 @@ submitButton.addEventListener("click", submitButtonHandler)
 
 
 
-//let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat=40.773201&lon=-111.933984&exclude=minutely,hourly&units=imperial&appid=fef5f3c78f3cb74fc39053b9cda63aea";
+let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat=40.773201&lon=-111.933984&exclude=minutely,hourly&units=imperial&appid=fef5f3c78f3cb74fc39053b9cda63aea";
 
-let weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=tonbridge&units=imperial&APPID=fef5f3c78f3cb74fc39053b9cda63aea";
+//let weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=tonbridge&units=imperial&APPID=fef5f3c78f3cb74fc39053b9cda63aea";
 
 //let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?q=84105&exclude=minutely,hourly&units=imperial&appid=fef5f3c78f3cb74fc39053b9cda63aea";
 

@@ -22,3 +22,28 @@ body {
 header {
     text-align: center;
 }
+
+/* .col-2, .col-12, .col-9, .col-3 {
+    padding-right: 5px;
+    padding-left: 5px;
+} */
+
+.cards {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.fiveDay{
+    padding-left: 15px;
+}
+.card-header {
+    color: var(--blue);
+}
+.title{
+    display: flex;
+    flex: wrap;
+}
+
+.title p {
+    padding-right: 15px;
+}
+
