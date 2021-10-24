@@ -21,24 +21,21 @@
                         <input class="col-12" name="city" type="text" id="input">
                         <button class="col-12" type="submit" id="search-btn">Search</button>
                     </div>
-                    <div class="row cityList">
-                        <h5 class="col-12">Salt Lake</h5>
-                        <h5 class="col-12">Denver</h5>
-                    </div>
+                    <div class="row cities"></div>
                 </div>
                 <div class="col-9">
                     <div class="col-12">
                         <div class="todaysWeather">
                             <div class="title">
-                                <p>City Name</p> 
-                                <p>(Date)</p>
-                                <img class="img" src="https://openweathermap.org/img/wn/10n@2x.png" alt="Card image cap" width=50 height=50>
+                                <p id="cityName">City Name</p> 
+                                <p id="currentDate">(Date)</p>
+                                <img id="titleImg" class="img" src="https://openweathermap.org/img/wn/10n@2x.png" alt="Card image cap" width=50 height=50>
                             </div>
                             <div class="weather">
-                                <p class="temp">Temp:</p>
-                                <p class="wind">Wind:</p>
-                                <p class="chumidity">Humidity:</p>
-                                <p class="uvIndex">UV Index:</p>
+                                <p class="temp">Temp: <span id="currentTemp"></span></p>
+                                <p class="wind">Wind: <span id="currentWind"></span></p>
+                                <p class="humidity">Humidity: <span id="currentHumidity"></span></p>
+                                <p class="uvIndex">UV Index: <span id="currentUV"></span></p>
                             </div>
                         </div>
                     </div>
@@ -104,7 +101,7 @@
             </div>
         </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
     <script src="./assets/js/scripts.js"></script>
 </body>
 </html>
