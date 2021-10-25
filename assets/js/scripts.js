@@ -23,8 +23,6 @@ var submitButtonHandler = function (event) {
         alert("please enter a city");
     }
 
-    console.log("Button",gData);
-
     setTimeout(function () {
         loadPage();
     }, 1000);
@@ -36,16 +34,13 @@ var getLatLong = function (selectedCity) {
     //var apiUrl = "http://api.positionstack.com/v1/forward?access_key=f17a81d114fb01bebd0af5544d9e26f5&query=" + selectedCity + "&limit=1";
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + selectedCity + "&units=imperial&APPID=fef5f3c78f3cb74fc39053b9cda63aea";
     //var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Denver&units=imperial&APPID=fef5f3c78f3cb74fc39053b9cda63aea";
-    
-    console.log(apiUrl);
-   
+
     fetch(apiUrl).then(function (response) {
             response.json().then(function (data) {
                 saveCity(selectedCity,data.coord.lon,data.coord.lat);
                 getWeather(data.coord.lon,data.coord.lat);
             });        
     });
-
 }
 
 var getWeather = function(cityLon,cityLat){
@@ -72,8 +67,6 @@ let loadCity = function(){
         cityEl.classList.add("col-12");
         cityEl.setAttribute("longitude",cityList[i].lon);
         cityEl.setAttribute("latitide",cityList[i].lat);
-        console.log(cityEl.getAttribute('longitude'));
-        console.log(cityEl.getAttribute('latitide'));
         cityListEl.append(cityEl);
     }
 
@@ -92,7 +85,6 @@ let saveCity = function(cityName, cityLon, cityLat) {
 
     let tempArray = {};
 
-    console.log(cityList.find(v => v.city === cityName));
     tempArray = (cityList.find(v => v.city === cityName));
     if (!tempArray) {
         tempArray = {city:cityName,lon:cityLon, lat:cityLat};
@@ -111,7 +103,6 @@ let saveCity = function(cityName, cityLon, cityLat) {
 
 let displayData = function(temp){
     gData = temp;
-    console.log(gData);
 }
 
 submitButton.addEventListener("click", submitButtonHandler);
@@ -119,16 +110,12 @@ submitButton.addEventListener("click", submitButtonHandler);
 document.getElementById("input")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
-    console.log(event);
     if (event.key === "Enter") {
         submitButton.click();
     }
 });
 
 cityListEl.addEventListener("click", function(item){
-    console.log(item.target.innerHTML);
-    console.log(item.target.getAttribute('longitude'));
-    console.log(item.target.getAttribute('latitide'));
     selectedCity = item.target.innerHTML;
     getWeather(item.target.getAttribute('longitude'),item.target.getAttribute('latitide'));
 
@@ -140,21 +127,35 @@ cityListEl.addEventListener("click", function(item){
 let loadPage = function(){
 
     document.getElementById("cityName").innerHTML = selectedCity;
-    document.getElementById("currentDate").innerHTML = new Date(gData.current.dt).toLocaleDateString("en-US");
+    document.getElementById("currentDate").innerHTML ="(" + new Date(gData.current.dt*1000).toLocaleDateString("en-US") + ")";
     document.getElementById("titleImg").src = "https://openweathermap.org/img/wn/"+ gData.current.weather[0].icon +"@2x.png"
+    document.getElementById("titleImg").alt = gData.current.weather[0].description;
     document.getElementById("currentTemp").innerHTML = gData.current.temp + "°F";
     document.getElementById("currentWind").innerHTML = gData.current.wind_speed + " MPH";
     document.getElementById("currentHumidity").innerHTML = gData.current.humidity +"%";
     document.getElementById("currentUV").innerHTML = gData.current.uvi;
-   
+    if(gData.current.uvi > 2){
+        document.getElementById("currentUV").style.backgroundColor="red";
+        document.getElementById("currentUV").style.color="white";
+    }
+    else if (gData.current.uvi > 1) {
+        document.getElementById("currentUV").style.backgroundColor="yellow";
+        document.getElementById("currentUV").style.color="black";
+    }
+    else {
+        document.getElementById("currentUV").style.backgroundColor="green";
+        document.getElementById("currentUV").style.color="white";
+    }
+    for(let i = 0;i < cardEl.length; i++){
 
+        cardEl[i].querySelector(".card-header").innerHTML="(" + new Date(gData.daily[i+1].dt*1000).toLocaleDateString("en-US") + ")";
+        cardEl[i].querySelector("img").src="https://openweathermap.org/img/wn/"+gData.daily[i+1].weather[0].icon +"@2x.png";
+        cardEl[i].querySelector("img").alt= gData.daily[i+1].weather[0].description;
+        cardEl[i].querySelector("#temp").innerHTML = gData.daily[i+1].temp.day + "°F";
+        cardEl[i].querySelector("#wind").innerHTML = gData.daily[i+1].wind_speed + " MPH";
+        cardEl[i].querySelector("#humidity").innerHTML = gData.daily[i+1].humidity +"%";
+    }
+   
 }
 
 loadCity();
-
-
-
- // console.log(cardEl[0].childNodes[3]);
-    // let imageTest = cardEl[0].querySelector("img");
-    // console.log(imageTest);
-    // imageTest.src="https://openweathermap.org/img/wn/13d@2x.png";
