@@ -32,7 +32,16 @@ The following image demonstrates the application functionality:
 
 ![weather dashboard demo](./assets/images/06-server-side-apis-homework-demo.png)
 
+
+Applciation Depoyment -
+
+https://lholgate.github.io/weather-dashboard/
+
+![finished weather dashboard](./assets/images/Weather-Dashboard.png)
+
+
 ## Review
+
 
 You are required to submit the following for review:
 

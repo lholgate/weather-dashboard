@@ -15,36 +15,93 @@
     <main>
         <div class="container">
             <div class="row">
-              <div class="col-3">
-                <div class="row">
-                    <h5 class="col-12">Enter City Name</h5>
-                    <input class="col-12" name="city" type="text" id="input">
-                    <button class="col-12" type="submit" id="search-btn">Search</button>
+                <div class="col-3">
+                    <div class="row">
+                        <h4 class="col-12">Enter City Name</h4>
+                        <input class="col-12" name="city" type="text" id="input">
+                        <button class="col-12" type="submit" id="search-btn">Search</button>
+                    </div>
+                    <div class="row cities"></div>
                 </div>
-              </div>
-              <div class="col-9">
-                <div class="row todaysWeather">
-                    <span class="col-12 city date">City Name (Date)</span>
-                    <span class="col-12 temperature">Temp:</span>
-                    <span class="col-12 wind">Wind:</span>
-                    <spam class="col-12 humidity">Humidity:</spam>
-                    <span class="col-12 uvIndex">UV Index:</span>
+                <div class="col-9">
+                    <div class="col-12">
+                        <div class="todaysWeather">
+                            <div class="title">
+                                <p id="cityName">City Name</p> 
+                                <p id="currentDate">(Date)</p>
+                                <img id="titleImg" class="img" src="https://openweathermap.org/img/wn/10n@2x.png" alt="Card image cap" width=50 height=50>
+                            </div>
+                            <div class="weather">
+                                <p class="temp">Temperature: <span id="currentTemp"></span></p>
+                                <p class="wind">Wind: <span id="currentWind"></span></p>
+                                <p class="humidity">Humidity: <span id="currentHumidity"></span></p>
+                                <p class="uvIndex">UV Index: <span id="currentUV"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row fiveDay">
+                        <h4 class="forcastTitle col-12">5 Day Forcast:</h4>
+                        <div class="col-2 cards">
+                            <div class="card">
+                                <div class="card-header">Date</div>
+                                <img class="card-img-top" src="https://openweathermap.org/img/wn/10n@2x.png" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Temperature: <span id="temp"></span></p>
+                                    <p class="card-text">Wind:     <span id="wind"></span></p>
+                                    <p class="card-text">Humidity: <span id="humidity"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 cards">
+                            <div class="card">
+                                <div class="card-header">Date</div>
+                                <img class="card-img-top" src="https://openweathermap.org/img/wn/10n@2x.png" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Temperature: <span id="temp"></span></p>
+                                    <p class="card-text">Wind:     <span id="wind"></span></p>
+                                    <p class="card-text">Humidity: <span id="humidity"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 cards">
+                            <div class="card">
+                                <div class="card-header">Date</div>
+                                <img class="card-img-top" src="https://openweathermap.org/img/wn/10n@2x.png" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Temperature: <span id="temp"></span></p>
+                                    <p class="card-text">Wind:     <span id="wind"></span></p>
+                                    <p class="card-text">Humidity: <span id="humidity"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 cards">
+                            <div class="card">
+                                <div class="card-header">Date</div>
+                                <img class="card-img-top" src="https://openweathermap.org/img/wn/10n@2x.png" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Temperature: <span id="temp"></span></p>
+                                    <p class="card-text">Wind:     <span id="wind"></span></p>
+                                    <p class="card-text">Humidity: <span id="humidity"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 cards">
+                            <div class="card">
+                                <div class="card-header">Date</div>
+                                <img class="card-img-top" src="https://openweathermap.org/img/wn/10n@2x.png" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">Temperature: <span id="temp"></span></p>
+                                    <p class="card-text">Wind:     <span id="wind"></span></p>
+                                    <p class="card-text">Humidity: <span id="humidity"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="forcastTitle col-12">5 Day Forcast</div>
-                </div>
-                <div class="row">
-                    <div class="card col-2">card1</div>
-                    <div class="card col-2">card2</div>
-                    <div class="card col-2">card3</div>
-                    <div class="card col-2">card4</div>
-                    <div class="card col-2">card5</div>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
     <script src="./assets/js/scripts.js"></script>
 </body>
 </html>
