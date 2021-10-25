@@ -37,7 +37,7 @@ Applciation Depoyment -
 
 https://lholgate.github.io/weather-dashboard/
 
-![finished weather dashboard](./assets/images/Weather-Dashboard.png)
+![finished weather dashboard](./assets/images/Weather-Dashboard.PNG)
 
 
 ## Review
