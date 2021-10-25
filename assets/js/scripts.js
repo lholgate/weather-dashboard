@@ -1,66 +1,78 @@
 
+//set object variables
 var submitButton = document.querySelector("#search-btn");
 var cityInputEl = document.querySelector("input");
 var cityListEl = document.querySelector(".cities");
 
 var cardEl = document.getElementsByClassName("card");
 
+//set array vaiables
 var cityList = [];
-
 var gData = [];
+
+//set global vaiables
 var selectedCity = "";
 
+//Look up city coordinates on button press
 var submitButtonHandler = function (event) {
     event.preventDefault();
-
     selectedCity = cityInputEl.value.trim();
 
     if (selectedCity) {
+        //call function to retrieve city coordiates
         var cityData = getLatLong(selectedCity);
         cityInputEl.value = "";
     }
     else {
-        alert("please enter a city");
+        //alert if city selection is blank
+        alert("Please enter a city");
     }
 
+    // one second wait for API call to complete
     setTimeout(function () {
+        //call function to load all page vales from API response
         loadPage();
     }, 1000);
 };
 
-
+//function to retrieve city coordinates
 var getLatLong = function (selectedCity) {
-   
-    //var apiUrl = "http://api.positionstack.com/v1/forward?access_key=f17a81d114fb01bebd0af5544d9e26f5&query=" + selectedCity + "&limit=1";
+    //set API URL
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + selectedCity + "&units=imperial&APPID=fef5f3c78f3cb74fc39053b9cda63aea";
-    //var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Denver&units=imperial&APPID=fef5f3c78f3cb74fc39053b9cda63aea";
-
+    //fetch city coordinates
     fetch(apiUrl).then(function (response) {
             response.json().then(function (data) {
+                //call function to save city coordinates to local storage
                 saveCity(selectedCity,data.coord.lon,data.coord.lat);
+                //call function to retrieve weather data from API
                 getWeather(data.coord.lon,data.coord.lat);
             });        
     });
 }
 
+//function to retrieve weather data
 var getWeather = function(cityLon,cityLat){
+    //set API URL
     let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+cityLat+"&lon="+cityLon+"&exclude=minutely,hourly&units=imperial&appid=fef5f3c78f3cb74fc39053b9cda63aea";
-    //let weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=tonbridge&units=imperial&APPID=fef5f3c78f3cb74fc39053b9cda63aea";
-
+  
+    //feteh weather data from API
     fetch(weatherURL).then(function (response) {
-
         response.json().then(function (data) {  
+            //save response to global array
             displayData(data);      
         });
     });
 }
 
+//function to load city list from local storage
 let loadCity = function(){
+    //retrieve city list form local storage
     cityList = JSON.parse(localStorage.getItem("cities"));
-
+    //check if array is retreived and set to empty array is no data is retrieved
     if (!cityList) {
         cityList = []};
 
+    //built HTML for city list from local storage
     for (i=0; i < cityList.length; i++){
         var cityEl = document.createElement('h5');
         cityEl.innerHTML=cityList[i].city;
@@ -70,26 +82,34 @@ let loadCity = function(){
         cityListEl.append(cityEl);
     }
 
+    //call get weather function for first city in local starage
     if(cityList.length > 0){
     getWeather(cityList[0].lon,cityList[0].lat);
     selectedCity = cityList[0].city
     };
 
+    //wait one second for API response before loading page data
     setTimeout(function () {
+        //call function to load weather data to page
         loadPage();
     }, 1000);
    
 }
 
+//function to save city data to local storage
 let saveCity = function(cityName, cityLon, cityLat) {
-
+    //define object for city to store
     let tempArray = {};
-
+    //check if object already exists for city name
     tempArray = (cityList.find(v => v.city === cityName));
+
+    //if no object exists for city then create record for local storage
     if (!tempArray) {
+        //save city data to local storage
         tempArray = {city:cityName,lon:cityLon, lat:cityLat};
         cityList.push(tempArray);
         localStorage.setItem("cities", JSON.stringify(cityList));
+        //add HTML object to city list
         var cityEl = document.createElement('h5');
         cityEl.innerHTML=cityName;
         cityEl.setAttribute("longitude",cityLon);
@@ -98,15 +118,15 @@ let saveCity = function(cityName, cityLon, cityLat) {
         cityListEl.append(cityEl);
     }
 }
-
-
-
+//store weather response in global array
 let displayData = function(temp){
     gData = temp;
 }
 
+//capture click of city search button and call function
 submitButton.addEventListener("click", submitButtonHandler);
 
+//check for ENTER key on city search imput and call button click
 document.getElementById("input")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -115,15 +135,19 @@ document.getElementById("input")
     }
 });
 
+//listen for clicks on cities in city list
 cityListEl.addEventListener("click", function(item){
     selectedCity = item.target.innerHTML;
+    //call function too get weather for city clicked
     getWeather(item.target.getAttribute('longitude'),item.target.getAttribute('latitide'));
 
+    //wait one second for response from weather API
     setTimeout(function () {
+        //call function to load page data from global array
         loadPage();
     }, 1000);
 });
-
+//functiont o load page data from API response
 let loadPage = function(){
 
     document.getElementById("cityName").innerHTML = selectedCity;
@@ -158,4 +182,5 @@ let loadPage = function(){
    
 }
 
+//call function to retrieve cities form local storage
 loadCity();
